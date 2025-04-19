@@ -6,8 +6,8 @@
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 7.3.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/1.svg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/1.svg">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
 <link rel="stylesheet" href="/css/main.css">
@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="白马？定叫他有来无回！">
@@ -150,7 +150,7 @@
     <link itemprop="mainEntityOfPage" href="http://example.com/2025/04/18/circos/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.png">
       <meta itemprop="name" content="Plank">
       <meta itemprop="description" content="白马？定叫他有来无回！">
     </span>
@@ -170,536 +170,32 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2025-04-18 20:02:45 / 修改时间：20:25:01" itemprop="dateCreated datePublished" datetime="2025-04-18T20:02:45+08:00">2025-04-18</time>
+              <time title="创建时间：2025-04-18 20:02:45" itemprop="dateCreated datePublished" datetime="2025-04-18T20:02:45+08:00">2025-04-18</time>
             </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>绘制circos图可以使用circos软件在服务器中运行，也可以使用TBtools，两者出图没有本质的区别，在此介绍对小白更友好，操作更简单的TBtools，但是一些文件的获得依旧需要依靠服务器.<br>教程来源主要为：<a target="_blank" rel="noopener" href="https://www.yuque.com/cjchen/hirv8i/b88df7179632c0ee5f86a4b74a58f933">https://www.yuque.com/cjchen/hirv8i/b88df7179632c0ee5f86a4b74a58f933</a><br>此外含有大量个人经验，仅看本教程完全可以完成全部工作</p>
-<h2 id="1-准备文件"><a href="#1-准备文件" class="headerlink" title="1.准备文件"></a>1.准备文件</h2><p>原始文件为chr.fasta（如果有除了染色体之外的序列，需要全部删去），all_chr.gff（重复序列注释文件）以及Msin.chr.gff（基因组注释文件）<br>然后准备文件（*表示必须）<br>1）*染色体长度文件<br>2）基因密度文件<br>3）TE密度文件<br>4）COPIA密度文件<br>5）GYPSY密度文件<br>6）GC含量密度文件<br>7）共线性文件  </p>
-<p><strong>1）染色体长度文件</strong></p>
-<p>TBtools-&gt;sequence toolkits-&gt;fasta tools-&gt;fasta stater<br>第一栏拖入chr.fasta，设置输出文件路径（需指定文件名），运行，提取出第一列及第四列中的数据，即得到染色体长度文件<br>也可以使用samtools和bedtools来完成，后面的文件也都需要这两个软件，图省事可以使用conda安装  </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/arq5x/bedtools2/archive/v2.30.0.tar.gz</span><br><span class="line">tar -zxvf v2.30.0.tar.gz</span><br><span class="line">cd bedtools2</span><br><span class="line">make</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/samtools/samtools/releases/download/1.13/samtools-1.13.tar.bz2</span><br><span class="line">tar -xvjf samtools-1.13.tar.bz2 </span><br><span class="line">cd samtools-1.13</span><br><span class="line">./configure</span><br><span class="line">make</span><br></pre></td></tr></table></figure>
-<p>安装好之后  </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">samtools dict chr.fasta &gt; out</span><br><span class="line">cat out | sed &#x27;s/:/\t/g&#x27;|cut -f 3,5 &gt;genome.chr.ln</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>cat out：读取前一步生成的字典文件  </li>
-<li>sed ‘s&#x2F;:&#x2F;\t&#x2F;g’：将行中的冒号替换为制表符（TAB），将信息分隔成多列  </li>
-<li>cut -f 3,5：提取第三列（染色体名称）和第五列（染色体长度）  </li>
-<li>&gt; genome.chr.ln：’将结果输出到genome.chr.ln文件中</li>
-</ul>
-<p><strong>如果使用circos软件绘图需要使用以下方法</strong>  </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">genome=tair10.genome.fa</span><br><span class="line">faidx $&#123;genome&#125; -i chromsizes &gt; tair10.genome.size</span><br><span class="line">awk -vFS=&quot;\t&quot; -vOFS=&quot;\t&quot; &#x27;&#123;print &quot;chr&quot;,&quot;-&quot;,$1,&quot;C&quot;NR,&quot;0&quot;,$2,&quot;chr&quot;NR&#125;&#x27; tair10.genome.size &gt; circos.chromosome.txt</span><br><span class="line">cat circos.chromosome.txt</span><br></pre></td></tr></table></figure>
-
-<p><strong>2）基因密度文件</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep -w &quot;gene&quot; Msin.chr.gff |awk &#x27;&#123;print $1&quot;\t&quot;$4&quot;\t&quot;$5&#125;&#x27;|uniq &gt; gene.pos</span><br></pre></td></tr></table></figure>
-<ul>
-<li>grep：用于在文件中查找匹配特定模式的行  </li>
-<li>-w：表示精确匹配整个单词gene，确保只匹配gene（而不是匹配包含gene作为部分的单词，如gene_name等）  </li>
-<li>awk：是一个文本处理工具，常用于提取文件的某些列  </li>
-<li>‘{print $1”\t”$4”\t”$5}’：这是awk的输出格式，表示提取并输出第1列（染色体）、第4列（基因起始位置）和第5列（基因结束位置），并以制表符 (\t) 分隔  </li>
-<li>uniq：用于删除相邻的重复行。如果文件中的某些基因注释是相同的并且相邻出现，uniq可以确保只保留一个实例</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bedtools makewindows -g genome.chr.ln -w 100000 &gt; 100K.genome.3col</span><br></pre></td></tr></table></figure>
-<ul>
-<li>bedtools makewindows：生成固定大小的滑窗（窗口）  </li>
-<li>-g genome.chr.ln：指定包含染色体名称和长度的文件，即前一步生成的genome.chr.ln文件  </li>
-<li>-w 100000：指定滑窗的大小为100,000个碱基对（100kb）  </li>
-<li>&gt; 100K.genome.3col：将生成的滑窗信息输出到100K.genome.3col文件中</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bedtools intersect -a 100K.genome.3col -b gene.pos -c &gt; gene.out</span><br></pre></td></tr></table></figure>
-<ul>
-<li>bedtools intersect：比较两个基因组区间文件，并计算它们之间的重叠</li>
-<li>-a 100K.genome.3col：指定第一个输入文件，这里是包含100kb滑窗的文件（例如100K.genome.3col），这个文件表示基因组上的100kb窗口</li>
-<li>-b gene.pos：指定第二个输入文件，这里是包含基因或其他元素（如LTR、GYPSY、COPIA等）位置的文件（gene.pos）</li>
-<li>-c：计算每个滑窗中与gene.pos中的基因或元素重叠的数量，并将结果添加到输出文件中作为新列</li>
-<li>&gt; gene.out：将结果输出到文件gene.out中</li>
-</ul>
-<p>如果需要  </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i &#x27;/^ptg/d&#x27; gene.out</span><br></pre></td></tr></table></figure>
-<p>-删除序列名中有‘ptg’的序列。这是因为有一些基因组注释文件中包含除染色体之外的基因注释，如我的染色体注释文件中就有ptg开头的序列，因此需要将不相关的统计结果删除</p>
-<p><strong>3）COPIA密度<br>4）GYPSY密度</strong>  </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">awk &#x27;&#123;print $1&quot;\t&quot;$4&quot;\t&quot;$5&#125;&#x27;  ../JNYL/all_chr.gff  |grep &quot;Copia&quot; &gt;copia.bed</span><br><span class="line">bedtools intersect -a 100K.genome.3col -b COPIA.pos -c &gt; COPIA.out</span><br></pre></td></tr></table></figure>
-<p>如果需要  </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i &#x27;/^ptg/d&#x27; COPIA.out</span><br></pre></td></tr></table></figure>
-
-<p><strong>5）TE密度文件</strong></p>
-<p>TE密度文件跟重复序列注释文件关系十分密切，如果重复序列注释文件类似以下形式（Repeat Masker注释）:</p>
-<pre><code>Chr5	RepeatMasker	Transposon	5635057	5638270	25165	+	.	ID=genome_TE0000001;Target=LTR_FINDER_ID=ctg54_3_ltr; 1895 5289;Class=LINE/RTE-BovB;PercDiv=2.7;PercDel=0.2;PercIns=0.3;
-Chr5	RepeatMasker	Transposon	5639304	5639382	422	-	.	ID=genome_TE0000002;Target=LTR_FINDER_ID=ctg54_3_ltr; 3093 3171;Class=LINE/RTE-BovB;PercDiv=16.5;PercDel=0.0;PercIns=0.0;
-</code></pre>
-<p>就与上面类似，或者可以直接使用注释文件，因为基本全是TE  </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep &quot;Transposon&quot; ../JNYL/all_without_trf_chr.gff &gt; TE.gff</span><br></pre></td></tr></table></figure>
-<p>如果不是，就检索关键词，将Transposon换为TE，或者Transposon Elements等，如果实在弄不清楚，就不要这一个文件，或者尝试使用EDTA，TE Density重新注释TE，构建TE库，但这与本篇教程目的相背离，因此后面再出详细教程</p>
-<p><strong>6）GC含量文件</strong></p>
-<p>TBtools-&gt;sequence toolkits-&gt;fasta tools-&gt;fasta Windows stat<br>输入文件为chr.fasta，窗口大小设置为10000，相邻窗口之间重叠的碱基数目设置1000，这两参数一般为默认<br>指定输出文件路径，运行<br>获得的文件为.GCratio文件</p>
-<p><strong>7）共线性文件</strong></p>
-<p>共线性文件可以使用服务器构建，也可以使用TBtools构建，在此介绍更为简单的TBtools<br>TBtools-&gt;other-&gt;plugin-&gt;plugin store-&gt;sequence analyses-&gt;onestepMCScanX-superfast-&gt;install<br>下载好之后onestepMCScanX-superfast位置在TBtools-&gt;other-&gt;plugin-&gt;sequence analyses-&gt;onestepMCScanX-superfast<br>第一个和第三个输入文件都为chr.fasta，第二第四个文件均为Msin.chr.gff，指定输出文件路径，运行<br>最终.geneLinkedRegion.tab.xls文件为共线性文件<br>如果要添加颜色，打开共线性文件，在最后一列填入相应的颜色，颜色为RGB格式，可在网站寻找：<br><a target="_blank" rel="noopener" href="https://www.rapidtables.org/zh-CN/web/color/html-color-codes.html#:~:text=%E9%A2%9C%E8%89%B2%20HTML%20/">https://www.rapidtables.org/zh-CN/web/color/html-color-codes.html#:~:text=%E9%A2%9C%E8%89%B2%20HTML%20/</a></p>
-<p>例如：</p>
-<pre><code>Chr1	10556167	10563729	Chr2	72596456	72608457
-Chr1	8479089	8487742	Chr3	8238545	8249992	&quot;255,255,0&quot;
-Chr1	8488084	8491727	Chr3	8256021	8262718	&quot;255,255,0&quot;
-</code></pre>
-<p>这样可显示chr1和chr3的共线性颜色，chr1和chr2为默认的浅灰色</p>
-<p>使用服务器可使用jcvi建立自比对，此步看之前的教程<br>从共线性的基因对，提取整合成circos的bed格式  </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">cat TNML.TNML.anchors |grep -v \#| while read line;</span><br><span class="line">do</span><br><span class="line">        gene_array=($line)</span><br><span class="line">        gene1_pos=`fgrep $&#123;gene_array[0]&#125; TNML.bed|cut -f 1-3`</span><br><span class="line">        gene2_pos=`fgrep $&#123;gene_array[1]&#125; TNML.bed|cut -f 1-3`</span><br><span class="line">        bed=$&#123;gene1_pos&#125;&quot; &quot;$&#123;gene2_pos&#125;</span><br><span class="line">        echo $bed &gt;&gt;TNML.coline_num.txt</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-
-<h2 id="2-绘制circos图"><a href="#2-绘制circos图" class="headerlink" title="2.绘制circos图"></a>2.绘制circos图</h2><p>TBtools-&gt;grapics-&gt;advance circos<br>第一个和第三个文件分别输入染色体长度文件和共线性文件，第二个文件不管，运行<br>如果想加入其他文件，可通过show control dialog中的add添加，可修改TrackType，有条形线型等，可自己尝试，startpos和endpos中pos指position，可调整位置，不过多赘述<br>比较常见要调整的为chr bar和chr label，前者调整染色体长度条形的位置，一般设置在最外层来避免看不清染色体长度，后者调整染色体名字位置，也是同理，其余参数均不需要太更改，因此不过多介绍，可以自己尝试，一般使用AI对输出的PDF文件更改更加方便  </p>
-<h2 id="3-使用circos软件绘制（该部分教程参考博客https-www-cnblogs-com-bgicollege-p-15543482-html）"><a href="#3-使用circos软件绘制（该部分教程参考博客https-www-cnblogs-com-bgicollege-p-15543482-html）" class="headerlink" title="3.使用circos软件绘制（该部分教程参考博客https://www.cnblogs.com/bgicollege/p/15543482.html）"></a>3.使用circos软件绘制（该部分教程参考博客<a target="_blank" rel="noopener" href="https://www.cnblogs.com/bgicollege/p/15543482.html%EF%BC%89">https://www.cnblogs.com/bgicollege/p/15543482.html）</a></h2><p>由于Circos是基于perl语言开发的，所以perl语言编译器的安装是必须的（建议Perl 5.8.x及以上版本），除此之外还需要很多perl依赖模块，可以通过测试查看缺少哪些模块并安装。详细的准备要求可以见<a target="_blank" rel="noopener" href="http://circos.ca/software/requirements/">http://circos.ca/software/requirements/</a></p>
-<h3 id="3-1下载解压"><a href="#3-1下载解压" class="headerlink" title="3.1下载解压"></a>3.1下载解压</h3><p>circos的官网的下载页面为<a target="_blank" rel="noopener" href="http://circos.ca/software/download/%EF%BC%8Ccircos-0.69-6.tgz%E6%98%AF%E7%9B%AE%E5%89%8D%E6%9C%80%E6%96%B0%E7%89%88%E7%9A%84%E5%AE%89%E8%A3%85%E5%8C%85%EF%BC%8C%E8%80%8Ccircos-course-2017.tgz%E5%88%99%E6%98%AF%E9%85%8D%E5%A5%97%E7%9A%84%E6%95%99%E7%A8%8B%E6%95%B0%E6%8D%AE%E3%80%82">http://circos.ca/software/download/，circos-0.69-6.tgz是目前最新版的安装包，而circos-course-2017.tgz则是配套的教程数据。</a>  </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget http://circos.ca/distribution/circos-0.69-6.tgz</span><br><span class="line">tar xvfz circos-0.69-6.tgz</span><br><span class="line">cd circos-0.69-6</span><br></pre></td></tr></table></figure>
-<h3 id="3-2安装缺失依赖模块"><a href="#3-2安装缺失依赖模块" class="headerlink" title="3.2安装缺失依赖模块"></a>3.2安装缺失依赖模块</h3><p>直接运行circos，根据报错再依次安装</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./circos -v</span><br></pre></td></tr></table></figure>
-<p>假设出现报错</p>
-<pre><code>missing Font::TTF::Font
-  error Can&#39;t locate Font/TTF/Font.pm in @INC (you may need to install the Font::TTF::Font module) (@INC contains: /home/walnut168/mnt/wf/program/circos-0.69-9/bin/lib /home/walnut168/mnt/wf/program/circos-0.69-9/bin/../lib /home/walnut168/mnt/wf/program/circos-0.69-9/bin /home/walnut168/perl5/lib/perl5/x86_64-linux-thread-multi /home/walnut168/perl5/lib/perl5 /home/walnut168/miniconda3/envs/wf/lib/perl5/5.32/site_perl /home/walnut168/miniconda3/envs/wf/lib/perl5/site_perl /home/walnut168/miniconda3/envs/wf/lib/perl5/5.32/vendor_perl /home/walnut168/miniconda3/envs/wf/lib/perl5/vendor_perl /home/walnut168/miniconda3/envs/wf/lib/perl5/5.32/core_perl /home/walnut168/miniconda3/envs/wf/lib/perl5/core_perl .) at (eval 35) line 1.
-</code></pre>
-<p>安装缺失依赖模块</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cpanm Font::TTF::Font</span><br></pre></td></tr></table></figure>
-
-<p>其他缺失模块以此类推</p>
-<p>一般来讲，缺少的模块，大部分安装起来都比较顺利，可能有一个除外，就是GD。GD模块是一个图像相关的源码库，它需要很多前置的依赖包和依赖软件，可部分参考（<a target="_blank" rel="noopener" href="http://starsyi.github.io/2016/05/31/%E9%9D%9Eroot%E7%94%A8%E6%88%B7perl-GD%E6%A8%A1%E5%9D%97%E7%9A%84%E5%AE%89%E8%A3%85/%EF%BC%89">http://starsyi.github.io/2016/05/31/%E9%9D%9Eroot%E7%94%A8%E6%88%B7perl-GD%E6%A8%A1%E5%9D%97%E7%9A%84%E5%AE%89%E8%A3%85/）</a><br>由于年代过于久远，因此参考博客有一部分错误，以下将该流程重新整理一遍。<br>（1）下载并编译安装libgd</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/libgd/libgd/releases/download/gd-2.3.3/libgd-2.3.3.tar.gz</span><br><span class="line">tar -xzf libgd-2.3.3.tar.gz</span><br><span class="line">cd libgd-2.3.3</span><br><span class="line">./configure --prefix=$HOME/local</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
-<p>编译安装好之后还需要将将 libgd 的库路径添加到环境变量中</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export LD_LIBRARY_PATH=$HOME/local/lib:$LD_LIBRARY_PATH</span><br><span class="line">export CPATH=$HOME/local/include:$CPATH</span><br><span class="line">export LIBRARY_PATH=$HOME/local/lib:$LIBRARY_PATH</span><br></pre></td></tr></table></figure>
-<p>（2）下载并安装GD</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">wget https://cpan.metacpan.org/authors/id/R/RU/RURBAN/GD-2.77.tar.gz</span><br><span class="line">tar -xzf GD-2.77.tar.gz</span><br><span class="line">cd GD-2.77</span><br><span class="line">perl Makefile.PL --lib_gd_path=$HOME/local</span><br><span class="line">make</span><br><span class="line">make test</span><br><span class="line">make install PREFIX=~/perl5</span><br></pre></td></tr></table></figure>
-<p>安装好之后设置Perl模块路径</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export PERL5LIB=~/perl5/lib/perl5:$PERL5LIB</span><br></pre></td></tr></table></figure>
-
-<p>以上所有操作完成之后运行以下命令验证GD是否安装成功</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">perl -e &#x27;use GD;&#x27;</span><br></pre></td></tr></table></figure>
-<p>没有报错说明安装成功，进入circos&#x2F;bin目录运行以下操作检验circos是否可以正常使用</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./circos -v</span><br></pre></td></tr></table></figure>
-<p>没有报错说明安装成功</p>
-<h3 id="3-3使用circos"><a href="#3-3使用circos" class="headerlink" title="3.3使用circos"></a>3.3使用circos</h3><h4 id="3-3-1准备文件"><a href="#3-3-1准备文件" class="headerlink" title="3.3.1准备文件"></a>3.3.1准备文件</h4><p><strong>（1）.conf文件的介绍</strong></p>
-<p>圈图中各个环道，是依赖一系列依赖调用的配置文件描述出来的，从底层的颜色等，到更高层，以及最终的元配置，构成了一个堆叠起来的配置文件金字塔。<br>Circos的配置文件后缀为.conf，内容是标记性文本格式的，类似于HTML或者XML，每个标签对代表一个配置块，起始标记为&lt;TAG&gt;，终止标记为&lt;&#x2F;TAG&gt;。配置块中的基本语法就是:</p>
-<pre><code> variable = value
-</code></pre>
-<p>举一个例子，一个简单的配置块：</p>
-<pre><code>&lt;plots&gt;
-type = line
-thickness = 2
-……
-&lt;plot&gt;
-</code></pre>
-<p>每个标签对可以使用多次，或者相互嵌套。因此就像编程中的函数或者循环结构一样，有全局变量和局部变量的区分，高级的或者外层的变量对于层内的所有实例都是有效的，而层内的定义则是优先级最高的。例如，下面配置中的  fill_color &#x3D; blue   对于对  &lt;plots&gt;&lt;&#x2F;plots&gt;   中所有实例都有效，除非实例内部自己用局部变量进行定义，如内部嵌套的第一个    &lt;plot&gt;&lt;&#x2F;plot&gt; 对中的  fill_color &#x3D; red    ：</p>
-<pre><code>&lt;plots&gt;
-fill_color = blue
-……
-    &lt;plot&gt;
-    fill_color = red
-    ……
-    &lt;/plot&gt;
-
-    &lt;plot&gt;
-    ……
-    &lt;/plot&gt;
-&lt;/plots&gt;
-</code></pre>
-<p>一些围绕同一个主题的重要配置块，可以另外单独写到一个配置文件中，再由其他的模块导入调用，所以理论上我们可以把所有的配置写在同一个文件中，也可以把每个配置块都分开到不同的文件中写，最后统一调用。</p>
-<p>其中最基本的配置文件都放在$PATH&#x2F;circos-0.69-4&#x2F;etc下面，主要是：</p>
-<pre><code>Housekeeping.conf #基本框架配置，circos必不可少的配置文件，一般直接导入即可。
-fonts.conf        #字体配置文件，其中，代表字体的标签与circos/fonts文件夹下的otf或ttf文件一一对应。
-patterns.conf     #模式配置文件，其中，标签与circos/tites文件夹下的png文件一一对应，然后根据patterns.svg.conf生成相应的svg文件。
-colors.conf       #颜色配置文件，导入了colors.brewer.conf、colors.hsv.conf和colors.ucsc.conf。在circos中，颜色除了绝对路径，还有很多表达方式，如hs1，red，reds-9-seq-1等，是因为这些字符在colors配置文件中已经赋予了特定的绝对路径。
-</code></pre>
-<p>以上的基本配置大多数情况下无需调整，直接调用导入即可。导入配置的基本格式是：</p>
-<pre><code>&lt;&lt;include etc/*.conf&gt;&gt; #etc/*.conf就是要导入的配置文件的相对或者绝对路径
-</code></pre>
-<p>还有一些经常用到的其他配置，可以根据自己喜好定制：</p>
-<p>ideogram.conf  #染色体展示的配置文件，包括是否展示bands，染色体展示位置、染色体间距离、染色体标签位置等。<br>ticks.conf     #刻度标签配置文件，可以导入到ideogram.conf中，也可以直接导入到主配置文件中。<br>image.conf     #对image大小、背景颜色、输出目录、输出文件形式以及染色体在圆周上的起始位置等进行设置。<br>最后，这些配置文件都会导入到circos.conf，基本内容是：</p>
-<pre><code>karyotype = data/karyotype/karyotype.mouse.mm9.txt #核型文件
-chromosomes_units = 1000000 #就是其他的配置文件中距离单位u的大小，以bp来衡量，一般大的基因组倾向于把一个单位的长度设置得大一些
-chromosomes_display_default = yes
-&lt;&lt;include mydata/ideogram.conf&gt;&gt;
-&lt;&lt;include mydata/ticks.conf&gt;&gt;
-……
-&lt;image&gt;
-&lt;&lt;include etc/image.conf&gt;&gt;
-&lt;/image&gt;
-&lt;&lt;include etc/colors_fonts_patterns.conf&gt;&gt;
-&lt;&lt;include etc/housekeeping.conf&gt;&gt;
-</code></pre>
-<p>配置完所有的配置文件后，最后将这个元配置文件输入Circos就可以产生结果：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">circos -conf circos.conf</span><br></pre></td></tr></table></figure>
-<p><strong>（2）基因组作图文件</strong></p>
-<p>1.计算染色体长度<br>安装samtools  </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/samtools/samtools/releases/download/1.13/samtools-1.13.tar.bz2</span><br><span class="line">tar -xvjf samtools-1.13.tar.bz2</span><br><span class="line">cd samtools-1.13</span><br><span class="line">./configure</span><br><span class="line">make</span><br></pre></td></tr></table></figure>
-
-<p>使用samtools中的插件faidx  </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">faidx ../zjll/ZJ.chr.fa -i chromsizes &gt; zj.size</span><br><span class="line">awk -vFS=&quot;\t&quot; -vOFS=&quot;\t&quot; &#x27;&#123;print &quot;chr&quot;,&quot;-&quot;,$1,&quot;C&quot;NR,&quot;0&quot;,$2,&quot;chr&quot;NR&#125;&#x27; zj.size &gt; zj.circos.chromosome.txt</span><br></pre></td></tr></table></figure>
-
-<p>也可以使用seqtk  </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">seqtk comp ../zjll/ZJ.chr.fa | grep &quot;^chr&quot; | awk &#x27;&#123;print $1&quot;\t&quot;$2&#125;&#x27; &gt; zj.genome.len</span><br><span class="line">awk &#x27;&#123;print &quot;chr\t-\t&quot;$1&quot;\t&quot;$1&quot;\t0\t&quot;$2&quot;\tchr&quot;NR&#125;&#x27; zj.genome.len &gt; zj_karyotype.txt</span><br><span class="line">#此处zj_karyotype.txt等同于上一步中的zj.circos.chromosome.txt，zj.size等同于zj.genome.len，两者均可相互替换，后不赘述</span><br></pre></td></tr></table></figure>
-
-<p>zj.circos.chromosome.txt结果如下：</p>
-<pre><code>#染色体 -   染色体编号(ID) 图显示名称(Label)     起始   结束    颜色
-chr     -       chr1    C1      0       33953567        chr1
-chr     -       chr2    C2      0       36348176        chr2
-chr     -       chr3    C3      0       32768115        chr3
-chr     -       chr4    C4      0       22859102        chr4
-chr     -       chr5    C5      0       19899253        chr5
-chr     -       chr6    C6      0       28512749        chr6
-chr     -       chr7    C7      0       28542370        chr7
-chr     -       chr8    C8      0       36419750        chr8
-chr     -       chr9    C9      0       33812785        chr9
-chr     -       chr10   C10     0       23968779        chr10
-chr     -       chr11   C11     0       29606729        chr11
-chr     -       chr12   C12     0       38801854        chr12
-chr     -       chr13   C13     0       49412298        chr13
-chr     -       chr14   C14     0       31566911        chr14
-chr     -       chr15   C15     0       37966322        chr15
-chr     -       chr16   C16     0       43438598        chr16
-</code></pre>
-<p>2.GC含量<br>生成窗口文件</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bedtools makewindows -w 50000 -g zj.genome.len &gt; zj.window.bed</span><br></pre></td></tr></table></figure>
-<p>计算每个窗口平均GC含量  </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">seqtk subseq ../zjll/ZJ.chr.fa zj.window.bed &gt; zj.window.fa</span><br><span class="line">seqtk comp zj.window.fa |awk &#x27;&#123;print $1 &quot;\t&quot; ($4+$5)/($3+$4+$5+$6) &#125; &#x27; | awk -F &quot;:|-&quot; &#x27;&#123;print $1&quot;\t&quot;$2&quot;\t&quot;$3&quot;\t&quot;$4&#125;&#x27;&gt; zj_gc.txt</span><br></pre></td></tr></table></figure>
-<p>3.基因条数  </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep -w &quot;gene&quot; LV.chr.gff |awk &#x27;&#123;print $1&quot;\t&quot;$4&quot;\t&quot;$5&#125;&#x27;|uniq &gt; gene.bed</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bedtools coverage -a genome.window.bed-b gene.bed -c &gt; gene.out</span><br></pre></td></tr></table></figure>
-<p>4.重复序列含量</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">bedtools coverage -a genome.window.bed -b repeat.gff | awk &#x27;&#123;print $1 &quot;\t&quot; $2 &quot;\t&quot; $3 &quot;\t&quot; $7&#125;&#x27; &gt; zj_repeat.txt</span><br><span class="line">#copia、gypsy</span><br><span class="line">grep &quot;Copia&quot;   ../JNYL/all_chr.gff |awk &#x27;&#123;print $1&quot;\t&quot;$4&quot;\t&quot;$5&#125;&#x27;  &gt;copia.bed</span><br><span class="line">bedtools coverage -a genome.window.bed-b copia.bed -c &gt; copia.out</span><br></pre></td></tr></table></figure>
-<p>5.共线性link文件</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">cat ZJ.LV.anchors | grep -v \# | while read line;</span><br><span class="line">do</span><br><span class="line">    gene_array=($line)</span><br><span class="line">    gene1_pos=$(awk -v gene=&quot;$&#123;gene_array[0]&#125;&quot; &#x27;$4 == gene &#123;print $1, $2, $3&#125;&#x27; zj.bed)</span><br><span class="line">    gene2_pos=$(awk -v gene=&quot;$&#123;gene_array[1]&#125;&quot; &#x27;$4 == gene &#123;print $1, $2, $3&#125;&#x27; LV.bed)</span><br><span class="line">    bed=$&#123;gene1_pos&#125;&quot; &quot;$&#123;gene2_pos&#125;</span><br><span class="line">    echo $bed &gt;&gt; ZL.LINKS.txt</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">cat LV.LV.anchors |grep -v \#| while read line;</span><br><span class="line">do</span><br><span class="line">        gene_array=($line)</span><br><span class="line">        gene1_pos=`fgrep $&#123;gene_array[0]&#125; LV.bed|cut -f 1-3`</span><br><span class="line">        gene2_pos=`fgrep $&#123;gene_array[1]&#125; LV.bed|cut -f 1-3`</span><br><span class="line">        bed=$&#123;gene1_pos&#125;&quot; &quot;$&#123;gene2_pos&#125;</span><br><span class="line">        echo $bed &gt;&gt;LV.LINKS.txt</span><br><span class="line">done</span><br><span class="line"># 使用 awk 重组数据（假设原始数据每行包含6的倍数列）</span><br><span class="line">awk &#x27;&#123;</span><br><span class="line">    for(i=1;i&lt;=NF;i+=6) &#123;</span><br><span class="line">        if($(i+5)) print $i,$(i+1),$(i+2),$(i+3),$(i+4),$(i+5)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;&#x27; LV.LINKS.txt &gt; LV.LINKS.circos.txt</span><br></pre></td></tr></table></figure>
-
-<p><strong>（3）核型配置文件</strong></p>
-<pre><code>Circos的配置中有四种单位，p, r, u, b
-p表示像素，1p表示1像素
-r表示相对大小，0.95r表示95% ring 大小。
-u表示相对chromosomes_unit的长度，如果chromosomes_unit = 1000，则1u就是千分之一的染色体长度。
-b表示碱基，如果染色体长1M，那么1b就是百万分之一的长度。
-</code></pre>
-<p>染色体图形配置文件，ideogram.conf文件基本配置如下：</p>
-<pre><code>&lt;ideogram&gt;
-    show = yes
-    &lt;spacing&gt;
-        default = 0.005r    #染色体间的空隙
-    &lt;/spacing&gt;
-    thickness      = 25p    #ideograms的厚度，可以使用r（比例关系）或p（像素）作为单位
-    fill           = yes    #设定ideograms是否填充颜色。填充的颜色取决于 karyotype 指定的文件的最后一列。
-    radius         = 0.8r   #设定ideograms的位置
-    show_label     = yes    #设定是否显示label
-    label_font     = default#设定label的字体
-    label_radius   = dims(ideogram,radius_outer) + 80p #设定label的位置
-    label_size     = 40p    #设定label的字体大小
-    label_parallel = yes    #设定label的字体方向，yes是易于浏览的方向。
-&lt;/ideogram&gt;
-</code></pre>
-<p>刻度文件，ticks.conf，基本配置如下：</p>
-<pre><code>&lt;ticks&gt;
-    tick_label_font  = light
-    radius           = dims(ideogram,radius_outer) + 10p  # 设定 ticks 的位置
-    label_offset     = 5p  # 设置 ticks&#39; label 离 ticks 的距离
-    label_size       = 20p  # 设置 ticks&#39; label 的字体大小
-    multiplier       = 0.001  # 设定 ticks&#39; label 的值的计算。将该刻度对应位置的值 * multiplier 得到能展示到圈图上的 label 值。
-    color            = black  # 设定 ticks 的颜色
-    thickness        = 1p  # 设定 ticks 的厚度
-
-    &lt;tick&gt;
-        spacing        = 50u  # 设置每个刻度代表的长度。
-        size           = 12p  # 设置 tick 的长度
-        show_label     = yes  # 是否显示 tick labels
-    &lt;/tick&gt;
-
-    &lt;tick&gt;
-        label_separation = 1p
-        spacing          = 5u
-        size             = 7p
-        show_label       = no
-    &lt;/tick&gt;
-&lt;/ticks&gt;
-</code></pre>
-<p>主配置文件，circos.conf，主要配置如下：</p>
-<pre><code>karyotype = karyotype.txt #指定染色体文件
-chromosomes_units = 1000000 #设置长度单位，表示为1M长度的序列代表为1u
-chromosomes_display_default = yes #默认是将所有的染色体都展示出来
-## 载入ideogram配置和刻度线配置
-show_ticks = yes # 显示刻度
-show_tick_labels = yes # 显示刻度label
-## plots block 绘制折线图、散点图、直方图、热图和文本显示
-&lt;plots&gt;
-## 绘制直方图
-&lt;plot&gt;
-type = histogram # histogram, line,scatter, heatmap,text
-file = data/gene_density.txt #文件路径
-# 设置直方图的位置，r1 &gt; r0
-r1 = 0.98r
-r0 = 0.9r
-orientation = out #直方图方向，in为向内
-fill_color = blue #直方图的填充颜色
-thickness = 2p #直方图轮廓厚度为 1p。
-extend_bin = no #若bins在坐标上不相连，最好设置不要将其连接到一起。
-# 设定直方图的背景颜色
-&lt;backgrounds&gt;
-&lt;background&gt;
-color = vlgrey
-&lt;/background&gt;
-&lt;/backgrounds&gt;
-&lt;/plot&gt;
-##绘制热图
-&lt;plot&gt;
-type = heatmap # 指定绘图类型为heatmap
-file = data/gene_density.txt # 设定数据文件路径
-# 设定图形所处位置
-r1 = 0.88r
-r0 = 0.8r
-color = green,yellow,red # 设定热图的颜色
-scale_log_base = 1 # 设定 scale_log_base 参数
-&lt;/plot&gt;
-##绘制折线图
-&lt;plot&gt;
-type = line # 指定绘图类型为line
-file = data/gene_density.txt # 设定数据文件路径
-# 设定图形所处位置
-r1 = 0.78r
-r0 = 0.7r
-color = green # 设定颜色
-&lt;backgrounds&gt;
-&lt;background&gt;
-y1 = 0.5r
-y0 = 0r
-color = vvlgrey
-&lt;/background&gt;
-&lt;background&gt;
-y1 = 1r
-y0 = 0.5r
-color = vvlred
-&lt;/background&gt;
-&lt;/backgrounds&gt;
-&lt;/plot&gt;
-##绘制散点图
-&lt;plot&gt;
-type = scatter # 指定绘图类型为scatter
-file = data/gene_density.txt # 设定数据文件路径
-# 设定图形所处位置
-r1 = 0.68r
-r0 = 0.6r
-glyph = circle # circle, rectangle, or triangle
-glyph_size = 4p # 点大小
-color = green # 设定颜色
-&lt;backgrounds&gt;
-&lt;background&gt;
-color = vvlgrey
-&lt;/background&gt;
-&lt;/backgrounds&gt;
-&lt;/plot&gt;
-##显示文本
-&lt;plot&gt;
-type = text #设置绘图类型为文本
-file = data/text.gene.txt # 数据文件路径
-color = black #文字颜色
-# 显示在图形中的位置
-r1 = 0.58r
-r0 = 0.45r
-label_font = default # 标签的字体
-label_size = 20p # 标签大小
-rpadding = 1p # 文字边缘的大小
-# 设置是否需要在 label 前加一条线，用来指出 lable 的位置。
-show_links = yes
-link_dims = 0p,2p,5p,2p,2p
-link_thickness = 2p
-link_color = red
-&lt;/plot&gt;
-&lt;/plots&gt;
-##links画连接线
-&lt;links&gt;
-&lt;link&gt;
-file = data/links.genePair.txt #link文件
-color = blue #设置颜色
-radius = 0.6r #设置 link 曲线的半径
-bezier_radius = 0r #设置贝塞尔曲线半径，该值设大后曲线扁平。
-thickness = 2 #设置 link 曲线的厚度
-## ribbon = yes #将线条连接改成带状连接
-######rules指定线条的颜色，
-&lt;rules&gt;
-&lt;rule&gt;
-condition = var(chr1) eq &quot;Chr1&quot; #共线性文件中，左边是Chr1的，指定颜色。var(chr1)这个不用修改，指的是file里左侧第一个，后面的“Chr1”根据实际的Chr来修改。
-color = rdylgn-11-div-1
-&lt;/rule&gt;
-
-&lt;rule&gt;
-condition = var(chr1) eq &quot;Chr2&quot;
-color = rdylgn-11-div-2
-&lt;/rule&gt;
-
-&lt;rule&gt;
-condition = var(chr1) eq &quot;Chr3&quot;
-color = rdylgn-11-div-3
-&lt;/rule&gt;
-
-&lt;rule&gt;
-condition = var(chr1) eq &quot;Chr4&quot;
-color = rdylgn-11-div-4
-&lt;/rule&gt;
-
-&lt;rule&gt;
-condition = var(chr1) eq &quot;Chr5&quot;
-color = rdylgn-11-div-5
-&lt;/rule&gt;
-
-&lt;rule&gt;
-condition = var(chr1) eq &quot;Chr6&quot;
-color = rdylgn-11-div-6
-&lt;/rule&gt;
-
-&lt;rule&gt;
-condition = var(chr1) eq &quot;Chr7&quot;
-color = rdylgn-11-div-7
-&lt;/rule&gt;
-
-&lt;rule&gt;
-condition = var(chr1) eq &quot;Chr8&quot;
-color = rdylgn-11-div-8
-&lt;/rule&gt;
-
-&lt;rule&gt;
-condition = var(chr1) eq &quot;Chr9&quot;
-color = rdylgn-11-div-9
-&lt;/rule&gt;
-
-&lt;rule&gt;
-condition = var(chr1) eq &quot;Chr10&quot;
-color = rdylgn-11-div-10
-&lt;/rule&gt;
-
-&lt;rule&gt;
-condition = var(chr1) eq &quot;Chr11&quot;
-color = rdylgn-11-div-11
-&lt;/rule&gt;
-
-&lt;rule&gt;
-condition = var(chr1) eq &quot;Chr12&quot;
-color = rdylbu-9-div-1
-&lt;/rule&gt;
-
-&lt;rule&gt;
-condition = var(chr1) eq &quot;Chr13&quot;
-color = rdylbu-9-div-2
-&lt;/rule&gt;
-
-&lt;rule&gt;
-condition = var(chr1) eq &quot;Chr14&quot;
-color = rdylbu-9-div-3
-&lt;/rule&gt;
-
-&lt;rule&gt;
-condition = var(chr1) eq &quot;Chr15&quot;
-color = rdylbu-9-div-4
-&lt;/rule&gt;
-
-&lt;rule&gt;
-condition = var(chr1) eq &quot;Chr16&quot;
-color = rdylbu-9-div-5
-&lt;/rule&gt;
-
-&lt;rule&gt;
-condition = var(chr1) eq &quot;Chr17&quot;
-color = rdylbu-9-div-6
-&lt;/rule&gt;
-&lt;/link&gt;
-&lt;/links&gt;
-&lt;ideogram&gt;
-&lt;spacing&gt;
-default = 0.005r
-
-#设置染色体之间空出个距离，用来标图例a,b,c,d,e,f
-&lt;pairwise Chr17;Chr1&gt;  #染色体名称是karyotype.Spo.txt中第3列的名称，根据你实际的物种第一条和最后一条来修改此处
-spacing = 5r #设置第一个和最后一个染色体中间空出5*default（0.005r）的距离
-&lt;/pairwise&gt;
-
-&lt;/spacing&gt;
-
-radius           = 0.85r #指定画图的半径（此半径和plots里的半径不一致，这个是总的0.85r，决定了整个圈图的最大的半径,plots里的0.99r半径是以这个0.85r作为100%来分配99%）
-thickness        = 10p #坐标轴的染色体的厚度
-fill             = yes
-show_bands      = yes #设置染色体条带填充，如果不想用条带填充，只用颜色，就设置为no
-fill_bands      = yes
-stroke_color     = dgrey
-stroke_thickness = 2p
-show_label     = yes #展示label
-label_font     = default # 字体
-label_radius   = dims(ideogram,radius) + 0.075r #位置
-label_size     = 12 # 字体大小
-label_parallel = yes # 是否平行
-label_format   = eval(sprintf(&quot;%s&quot;,var(chr))) # 格式
-&lt;/ideogram&gt;
-
-##以下部分通常不做修改
-#设置图片参数
-&lt;image&gt;
-#覆盖原来的图片半径参数
-#radius* = 500
-&lt;/image&gt;
-#设置颜色，字体，填充模式的配置信息：
-#系统与debug参数：
-</code></pre>
-<h4 id="3-3-3运行"><a href="#3-3-3运行" class="headerlink" title="3.3.3运行"></a>3.3.3运行</h4><p>完成以上配置文件后运行命令</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">circos -conf circos.conf</span><br></pre></td></tr></table></figure>
-<p>即可<br>如果是两个物种之间的比较的圈图，直接将对应的文件合并成一个文件即可，需要注意的是，两个物种的染色体名称需要不同</p>
-<p><em><strong>&lt;后话&gt;</strong></em><br>circos图可展示的远不止以上这些，还可以展示染色体可及性，表达水平，只要最后文件与上面所展示的文件格式类似就可以展示，不得不感慨，这真的是技术与美学的一场碰撞。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2025/04/17/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Plank">
-      <meta itemprop="description" content="白马？定叫他有来无回！">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="WeFun blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2025/04/17/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2025-04-19 11:05:59" itemprop="dateModified" datetime="2025-04-19T11:05:59+08:00">2025-04-19</time>
               </span>
-              <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2025-04-17 20:36:09" itemprop="dateCreated datePublished" datetime="2025-04-17T20:36:09+08:00">2025-04-17</time>
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span></span>
             </span>
-
-          
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>NaN:aN</span>
+            </span>
 
         </div>
       </header>
@@ -710,20 +206,15 @@ label_format   = eval(sprintf(&quot;%s&quot;,var(chr))) # 格式
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
+          <p>绘制circos图可以使用circos软件在服务器中运行，也可以使用TBtools，两者出图没有本质的区别，在此先介绍对小白更友好，操作更简单的TBtools，但是一些文件的获得依旧需要依靠服务器.  后面介绍circos软件的使用<br>教程来源主要为：<a target="_blank" rel="noopener" href="https://www.yuque.com/cjchen/hirv8i/b88df7179632c0ee5f86a4b74a58f933">https://www.yuque.com/cjchen/hirv8i/b88df7179632c0ee5f86a4b74a58f933</a><br>此外含有大量个人经验，仅看本教程完全可以完成全部工作</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/04/18/circos/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -796,6 +287,8 @@ label_format   = eval(sprintf(&quot;%s&quot;,var(chr))) # 格式
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Plank"
+      src="/images/avatar.png">
   <p class="site-author-name" itemprop="name">Plank</p>
   <div class="site-description" itemprop="description">白马？定叫他有来无回！</div>
 </div>
@@ -804,7 +297,7 @@ label_format   = eval(sprintf(&quot;%s&quot;,var(chr))) # 格式
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-count">1</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -837,6 +330,16 @@ label_format   = eval(sprintf(&quot;%s&quot;,var(chr))) # 格式
     <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Plank</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">NaNm</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">NaN:aN</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
@@ -891,6 +394,7 @@ label_format   = eval(sprintf(&quot;%s&quot;,var(chr))) # 格式
   
 
   
+
 
 </body>
 </html>
