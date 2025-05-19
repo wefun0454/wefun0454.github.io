@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/1.svg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/1.svg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="基因家族扩张收缩基因家族指来自大部份物种的MRCA（最近共同祖先，Most Recent Common Ancestor）的同一个始祖基因演化而来的一组基因。CAFE(Computational Analysis of gene Family Evolution)是一款以解释系统发育历史的方式分析基因家族大小变化的软件，这种分析常被称为基因家族收缩扩张(Gene family expansions">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WeFun blog">
+<meta property="og:url" content="http://example.com/2025/05/19/%E5%9F%BA%E5%9B%A0%E5%AE%B6%E6%97%8F%E6%89%A9%E5%BC%A0%E6%94%B6%E7%BC%A9/index.html">
+<meta property="og:site_name" content="WeFun blog">
+<meta property="og:description" content="基因家族扩张收缩基因家族指来自大部份物种的MRCA（最近共同祖先，Most Recent Common Ancestor）的同一个始祖基因演化而来的一组基因。CAFE(Computational Analysis of gene Family Evolution)是一款以解释系统发育历史的方式分析基因家族大小变化的软件，这种分析常被称为基因家族收缩扩张(Gene family expansions">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-05-19T07:53:23.603Z">
+<meta property="article:modified_time" content="2025-05-19T07:36:18.458Z">
+<meta property="article:author" content="Plank">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2025/05/19/%E5%9F%BA%E5%9B%A0%E5%AE%B6%E6%97%8F%E6%89%A9%E5%BC%A0%E6%94%B6%E7%BC%A9/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title> | WeFun blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">WeFun blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/05/19/%E5%9F%BA%E5%9B%A0%E5%AE%B6%E6%97%8F%E6%89%A9%E5%BC%A0%E6%94%B6%E7%BC%A9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Plank">
+      <meta itemprop="description" content="白马？定叫他有来无回！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="WeFun blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2025-05-19 15:53:23 / 修改时间：15:36:18" itemprop="dateCreated datePublished" datetime="2025-05-19T15:53:23+08:00">2025-05-19</time>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>10k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>9 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="基因家族扩张收缩"><a href="#基因家族扩张收缩" class="headerlink" title="基因家族扩张收缩"></a>基因家族扩张收缩</h1><p>基因家族指来自大部份物种的MRCA（最近共同祖先，Most Recent Common Ancestor）的同一个始祖基因演化而来的一组基因。<br>CAFE(Computational Analysis of gene Family Evolution)是一款以解释系统发育历史的方式分析基因家族大小变化的软件，这种分析常被称为基因家族收缩扩张(Gene family expansions and contractions)分析。2005年该软件相关算法就已经发表，最近一次更新在2023年。CAFE使用出生和死亡过程来模拟用户指定的系统发育树中的基因获得和丢失（获得替换率，λ），2017年时首次提出不同枝基因的出生死亡率不同，这样可以算出父节点到子节点的基因家族大小转移率，也可推断祖先物种的基因家族大小<br>研究基因家族在进化过程中的大小变化，即关注旁系同源基因的演化，本次教程主要来源： <a target="_blank" rel="noopener" href="https://yanzhongsino.github.io/2021/10/29/bioinfo_gene.family_CAFE5/">https://yanzhongsino.github.io/2021/10/29/bioinfo_gene.family_CAFE5/</a> </p>
+<h2 id="1-安装"><a href="#1-安装" class="headerlink" title="1.安装"></a>1.安装</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install -c bioconda cafe</span><br></pre></td></tr></table></figure>
+<p>安装的是CAFE4<br>直接上官网安装可以安装到最新版</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/hahnlab/CAFE5.git</span><br><span class="line">cd CAFE5</span><br><span class="line">./configure</span><br><span class="line">make</span><br></pre></td></tr></table></figure>
+<p>如果遇到报错</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">g++ -std=c++11 -I. -O3 -include config.h -DDOCTEST_CONFIG_DISABLE -fopenmp  -c src/matrix_cache.cpp -o obj/matrix_cache.o</span><br><span class="line">src/matrix_cache.cpp:12:10: fatal error: cblas.h: No such file or directory</span><br><span class="line">   12 | #include &quot;cblas.h&quot;</span><br><span class="line">      |          ^~~~~~~~~</span><br><span class="line">compilation terminated.</span><br><span class="line">make: *** [Makefile:35: obj/matrix_cache.o] Error 1</span><br></pre></td></tr></table></figure>
+<p>这是因为缺少数学运算程序，只需要安装blas和lapack即可，主要教程为： <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/520848641">https://zhuanlan.zhihu.com/p/520848641</a><br>blas已经包括在lapack中，因此只需要下载lapack即可  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#下载LAPACK</span><br><span class="line">wget https://github.com/Reference-LAPACK/lapack/archive/refs/tags/v3.12.1.tar.gz</span><br></pre></td></tr></table></figure>
+<p>解压完成之后进入lapack-3.12.1</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cd lapack-3.12.1</span><br><span class="line">cp make.inc.example make.inc</span><br><span class="line">make blaslib</span><br><span class="line">make cblaslib</span><br><span class="line">make lapacklib</span><br><span class="line">make lapackelib</span><br></pre></td></tr></table></figure>
+<p>编译完成之后将静态库加入到环境变量即可（没有root权限）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export LIBRARY_PATH=&quot;$LIBRARY_PATH:/xxx/lapack-3.10.1&quot;</span><br><span class="line">export C_INCLUDE_PATH=&quot;$C_INCLUDE_PATH:/xxx/lapack-3.10.1/LAPACKE/include:/xxx/lapack-3.10.1/CBLAS/include&quot;</span><br></pre></td></tr></table></figure>
+<p>除此之外，还需要将CAFE5&#x2F;makefile文件开头部分加上cblas.h位置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CFLAGS += -I/home/walnut168/mnt/wf/program/lapack-3.12.1/CBLAS/include</span><br></pre></td></tr></table></figure>
+<h2 id="2-准备文件"><a href="#2-准备文件" class="headerlink" title="2.准备文件"></a>2.准备文件</h2><p>CAFE5需要至少两个输入文件，一个是基因家族计数文件gene_families.txt，一个是树文件tree.txt</p>
+<h3 id="2-1gene-families-txt"><a href="#2-1gene-families-txt" class="headerlink" title="2.1gene_families.txt"></a>2.1gene_families.txt</h3><p>制表符分隔的基因家族计数文件，通常用OrthoMCL, SwiftOrtho, FastOrtho, OrthAgogue, OrthoFinder等软件获取，因此可以直接使用OrthoFinder的Orthogroups.GeneCount.tsv文件来获得<br>文件位置为&#x2F;data&#x2F;OrthoFinder&#x2F;Results_Apr21&#x2F;Orthogroups&#x2F;Orthogroups.GeneCount.tsv  </p>
+<p>CAFE给的示例文件文件如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#第一列是功能描述Desc，不清楚可以写为null，第二列是Family ID</span><br><span class="line">Desc	Family ID	human	chimp	orang	baboon	gibbon	macaque	marmoset rat	mouse	cat	horse	cow</span><br><span class="line">ATPase	ORTHOMCL1	 52	 55	 54	 57	 54	  56	  56	 53	 52	57	55	 54</span><br><span class="line">(null)	ORTHOMCL2	 76	 51	 41	 39	 45	  36	  37	 67	 79	37	41	 49</span><br><span class="line">HMG box	ORTHOMCL3	 50	 49	 48	 48	 46	  49	  48	 55	 52	51	47	 55</span><br><span class="line">(null)	ORTHOMCL4	 43	 43	 47	 53	 44	  47	  46	 59	 58	51	50	 55</span><br><span class="line">Dynamin	ORTHOMCL5	 43	 40	 43	 44	 31	  46	  33	 79	 70	43	49	 50</span><br></pre></td></tr></table></figure>
+<p>使用Orthogroups.GeneCount.tsv得到gene_families.txt，需要进行一些处理</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk -v OFS=&quot;\t&quot; &#x27;&#123;$NF=null;print $1,$0&#125;&#x27; Orthogroups.GeneCount.tsv |sed -E -e &#x27;s/Orthogroup/desc/&#x27; -e &#x27;s/_[^\t]+//g&#x27; &gt;gene_families.txt</span><br></pre></td></tr></table></figure>
+<p>这一步的主要操作是给文件加上第一列desc，除此之外就是将文件分隔符改为\t</p>
+<p>值得注意的是如果不事先删除不同物种间的基因拷贝数变异特别大的基因家族，则会出现报错  </p>
+<pre><code>Failed to initialize any reasonable values
+</code></pre>
+<p>可以使用cafe5自带的一个脚本，cafe5的tutorial目录下脚本clade_and_size_filter.py可以筛除一个或以上物种有超过100个基因拷贝的基因家族。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python clade_and_size_filter.py -s -i gene_families.txt -o gene_familie_filter.txt</span><br></pre></td></tr></table></figure>
+<p>注意运行脚本时gene_families.txt需删去表头，但是CAFE的输入文件需要表头，因此后面需要加上</p>
+<h3 id="2-2tree-txt"><a href="#2-2tree-txt" class="headerlink" title="2.2tree.txt"></a>2.2tree.txt</h3><p>带分化时间的，二叉的，有根的，超度量树，树的格式为newick格式，超度量树指树的最近发散序列的分支长度相等。<br>可以使用PAML生成的结果FigTree.tre转换成tree.txt文件  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">grep -E -v &quot;NEXUS|BEGIN|END&quot; FigTree.tre|sed -E -e &quot;s/\[[^]]*\]//g&quot; -e &quot;s/[ \t]//g&quot; -e &quot;/^$/d&quot; -e &quot;s/UTREE/tree tree/&quot; &gt;tree.txt</span><br><span class="line">cat FigTree.tre | sed &#x27;s/\[[^]]\+\]//g&#x27;| awk -F &quot;=&quot; &#x27;/UTREE/&#123;print $2&#125; &#x27; &gt; input.tree.nwk</span><br><span class="line">sed -e &#x27;s/:/\n:/g&#x27; -e &#x27;s/\([),]\)/\n\1/g&#x27; input.tree.nwk | awk &#x27;&#123;if($1~/:$/)&#123;printf &quot;:&quot;100*$2&#125; else &#123;printf $0&#125;&#125;&#x27; | sed &#x27;s/\s\+//g&#x27; &gt; input.tree</span><br></pre></td></tr></table></figure>
+<h2 id="3-运行"><a href="#3-运行" class="headerlink" title="3.运行"></a>3.运行</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cafe5 --infile gene_families.txt --tree tree.txt --cores 5 --output_prefix cafe_out </span><br><span class="line"></span><br><span class="line">--infile gene_families.txt 输入基因家族文件</span><br><span class="line">--tree tree.txt 输入树文件</span><br><span class="line">--cores 5 指定5个核运行</span><br><span class="line">--output_prefix cafe_out 输出文件名</span><br></pre></td></tr></table></figure>
+<p>其他可添加参数  </p>
+<ul>
+<li>-p代表指定root frequency distribution为泊松分布（默认是均匀分布uniform distribution）。</li>
+<li>-k 3代表使用GAMMA模型（默认是base模型）并且使用3种gamma rate（代表不同基因家族有着不同的进化速率）。-k的值需要运行多次比较likelihood并确保收敛后才知道使用哪个最好，一般来说2-5之间试一试。</li>
+</ul>
+<h2 id="4-结果"><a href="#4-结果" class="headerlink" title="4.结果"></a>4.结果</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">cafe_out/</span><br><span class="line">Base_asr.tre # 进化树格式，记录了基因数目, 显著变化节点*标</span><br><span class="line">Base_branch_probabilities.tab # 记录每个节点pvalue</span><br><span class="line">Base_change.tab # 记录每个节点增加或减少的基因数目</span><br><span class="line">Base_clade_results.txt # 每个节点收缩扩张基因家族数目统计，可用于做饼图</span><br><span class="line">Base_count.tab # 记录每个节点基因数目</span><br><span class="line">Base_family_likelihoods.txt</span><br><span class="line">Base_family_results.txt # 记录家族水平是否显著变化即p&lt;0.05</span><br><span class="line">Base_results.txt</span><br></pre></td></tr></table></figure>
+<p>Base_asr.tre文件是记录信息最全的文件，开头部分如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#nexus</span><br><span class="line">BEGIN TREES;</span><br><span class="line">  TREE OG0000000 = ((LZ&lt;1&gt;*_3:8.21782,WX&lt;2&gt;_34:8.21782)&lt;27&gt;*_43:1.706,(JB&lt;3&gt;_69:9.62703,(SJ&lt;4&gt;_72:8.85394,(YX&lt;5&gt;*_116:7.83667,(WYZ&lt;6&gt;*_49:6.95006,(SL&lt;7&gt;_65:6.43522,(SD&lt;8&gt;_88:5.94193,((DX&lt;9&gt;*_188:4.89218,(PT&lt;10&gt;_112:4.47741,((MGY&lt;11&gt;*_144:2.19967,NNJ&lt;12&gt;*_102:2.19967)&lt;38&gt;_117:1.19645,(YJ&lt;13&gt;*_96:2.48949,(nigra&lt;14&gt;_134:0.284379,CH&lt;15&gt;_137:0.284379)&lt;40&gt;*_134:2.20511)&lt;39&gt;_113:0.906634)&lt;37&gt;_112:1.08128)&lt;36&gt;_107:0.414774)&lt;35&gt;*_105:0.614199,(MDL&lt;16&gt;*_58:4.33793,((EL&lt;17&gt;_95:1.21337,XZ&lt;18&gt;_90:1.21337)&lt;43&gt;_90:1.9202,(EZQ&lt;19&gt;*_62:1.90236,(HG&lt;20&gt;_76:1.32269,((TN&lt;21&gt;*_85:1.16139,HYM&lt;22&gt;*_66:1.16139)&lt;47&gt;_77:0.072474,(XH&lt;23&gt;_82:0.435824,(WC&lt;24&gt;_81:0.35856,JN&lt;25&gt;_80:0.35856)&lt;49&gt;_80:0.077264)&lt;48&gt;_80:0.798037)&lt;46&gt;_77:0.088832)&lt;45&gt;_77:0.579668)&lt;44&gt;_76:1.23121)&lt;42&gt;_82:1.20436)&lt;41&gt;*_83:1.16845)&lt;34&gt;*_91:0.43555)&lt;33&gt;*_86:0.493286)&lt;32&gt;_81:0.514848)&lt;31&gt;_77:0.886606)&lt;30&gt;*_74:1.01727)&lt;29&gt;*_66:0.773085)&lt;28&gt;_60:0.296801)&lt;26&gt;_58;</span><br><span class="line">  TREE OG0000005 = ((LZ&lt;1&gt;*_1:8.21782,WX&lt;2&gt;_12:8.21782)&lt;27&gt;*_18:1.706,(JB&lt;3&gt;*_41:9.62703,(SJ&lt;4&gt;*_13:8.85394,(YX&lt;5&gt;_32:7.83667,(WYZ&lt;6&gt;_49:6.95006,(SL&lt;7&gt;*_32:6.43522,(SD&lt;8&gt;_60:5.94193,((DX&lt;9&gt;*_72:4.89218,(PT&lt;10&gt;*_84:4.47741,((MGY&lt;11&gt;_63:2.19967,NNJ&lt;12&gt;*_45:2.19967)&lt;38&gt;_55:1.19645,(YJ&lt;13&gt;_60:2.48949,(nigra&lt;14&gt;_42:0.284379,CH&lt;15&gt;_44:0.284379)&lt;40&gt;*_44:2.20511)&lt;39&gt;_54:0.906634)&lt;37&gt;_56:1.08128)&lt;36&gt;_59:0.414774)&lt;35&gt;_58:0.614199,(MDL&lt;16&gt;*_45:4.33793,((EL&lt;17&gt;_73:1.21337,XZ&lt;18&gt;*_85:1.21337)&lt;43&gt;_77:1.9202,(EZQ&lt;19&gt;*_94:1.90236,(HG&lt;20&gt;*_88:1.32269,((TN&lt;21&gt;_70:1.16139,HYM&lt;22&gt;_79:1.16139)&lt;47&gt;_74:0.072474,(XH&lt;23&gt;_64:0.435824,(WC&lt;24&gt;*_48:0.35856,JN&lt;25&gt;_58:0.35856)&lt;49&gt;*_58:0.077264)&lt;48&gt;*_61:0.798037)&lt;46&gt;_74:0.088832)&lt;45&gt;_75:0.579668)&lt;44&gt;_77:1.23121)&lt;42&gt;*_71:1.20436)&lt;41&gt;_60:1.16845)&lt;34&gt;*_55:0.43555)&lt;33&gt;*_51:0.493286)&lt;32&gt;_46:0.514848)&lt;31&gt;*_43:0.886606)&lt;30&gt;*_36:1.01727)&lt;29&gt;_29:0.773085)&lt;28&gt;_27:0.296801)&lt;26&gt;_26;</span><br></pre></td></tr></table></figure>
+<p>Base_asr.tre记录文件信息为TREE &lt;Family ID&gt; +树(物种名&lt;内部节点名称&gt;_基因家族数量：枝长……..以此类推)，*号表示该节点相对于最近祖先的基因家族变化非常显著，p&lt;0.05</p>
+<h2 id="5-可视化"><a href="#5-可视化" class="headerlink" title="5.可视化"></a>5.可视化</h2><h3 id="5-1绘制饼图"><a href="#5-1绘制饼图" class="headerlink" title="5.1绘制饼图"></a>5.1绘制饼图</h3><p>将基因家族扩张收缩的条数用于绘制饼图，绘制过程可以使用itol网站，绘制文件是树文件，因此需要从CAFE结果中提取树文件<br>Base_asr.tre中记录了所有基因家族的树，所有的树都是一致的，只不过基因家族数不同，因此可以使用以下代码提取任意一个树即可  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk &#x27;/TREE OG0000000 = /&#123;print $NF&#125;&#x27; out/Base_asr.tre |sed -r &#x27;s/_[0-9]+//g ; s/([^)])&lt;[0-9]+&gt;/\1/g ; s/\*//g&#x27; &gt;out.tree</span><br></pre></td></tr></table></figure>
+<p>然后就是具体基因家族扩张收缩绘图文件获得</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">##提取cafe输出的家族总个数，用于计算基因家族有多少基因家族没有变化</span><br><span class="line">Tnum=$(grep -c &quot;OG&quot; Orthogroups.GeneCount.tsv)</span><br><span class="line">##生成用于itol绘图的dataset文件</span><br><span class="line">echo -e &quot;DATASET_PIECHART</span><br><span class="line">SEPARATOR\tTAB</span><br><span class="line">DATASET_LABEL\ttest</span><br><span class="line">FIELD_COLORS\t#339900\t#FF0033\t#0099FF</span><br><span class="line">FIELD_LABELS\tIncrease\tDecrease\tRemain</span><br><span class="line">DATA&quot; &gt; cafe_itol.txt</span><br><span class="line">##获得扩张收缩家族数</span><br><span class="line">sed -r &#x27;s/^([^&gt;]+)&lt;[0-9]+&gt;/\1/g&#x27; out/Base_clade_results.txt | awk  &#x27;!/^#/&#123; p=0.5; s=10; C=&#x27;$Tnum&#x27;-$2-$3-1; if(!/^&lt;/)&#123;p=-1&#125;; print $1 &quot;\t&quot; p &quot;\t&quot; s &quot;\t&quot; $2 &quot;\t&quot; $3 &quot;\t&quot; C &#125;&#x27; &gt;&gt; cafe_itol.txt</span><br></pre></td></tr></table></figure>
+<p>itol的dataset文件表头以下信息的含义为<br>第一列绘制饼图的内部节点的名称，第二列为饼图绘制的位置，第四列为饼图的直径，第五列之后是绘制饼图的绘制数据<br>绘制时，直接拖入饼图dataset文件即可</p>
+<p>除此之外，itol网站还可以添加标签注释，与上面类似，只需要写好绘图的dataset文件即可，所有文件格式均在itol最上面HELP-&gt;HELP PAGE，页面左侧Dataset type中有详细介绍与示例文件，以下展示添加文本标签的示例文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line">DATASET_TEXT</span><br><span class="line"># 在文本数据集中，每个ID关联一个文本标签，可直接显示在节点分支上或树外</span><br><span class="line"># 以井号(#)开头的行是注释，解析时会被忽略</span><br><span class="line">#=================================================================#</span><br><span class="line">#                        必填设置                                 #</span><br><span class="line">#=================================================================#</span><br><span class="line"># 选择下方数据的分隔符（TAB, SPACE 或 COMMA）。此分隔符必须在全文件统一使用。</span><br><span class="line"># SEPARATOR TAB</span><br><span class="line"># SEPARATOR SPACE</span><br><span class="line">SEPARATOR COMMA  # 当前使用逗号分隔</span><br><span class="line"></span><br><span class="line"># 用于图例表的标签（后续可修改）</span><br><span class="line">DATASET_LABEL,example text dataset</span><br><span class="line"></span><br><span class="line"># 数据集颜色（后续可修改）</span><br><span class="line">COLOR,#ff0000  # 红色</span><br><span class="line"></span><br><span class="line">#=================================================================#</span><br><span class="line">#                        可选设置                                 #</span><br><span class="line">#=================================================================#</span><br><span class="line"># 所有其他可选设置可在网页界面中修改（位于&#x27;Datasets&#x27;选项卡下）</span><br><span class="line"></span><br><span class="line"># 左边距（可正可负），用于调整与下一个数据集的间距。仅影响外部文本标签</span><br><span class="line">MARGIN,0</span><br><span class="line"></span><br><span class="line"># 仅适用于外部文本标签。设为1时，即使内部节点未折叠也会显示其标签（可能导致重叠）</span><br><span class="line">SHOW_INTERNAL,0</span><br><span class="line"></span><br><span class="line"># 所有标签旋转指定角度</span><br><span class="line">ALL_LABELS_ROTATION,0</span><br><span class="line"></span><br><span class="line"># 默认内部标签在分支上方。设为1时，标签显示在分支下方</span><br><span class="line">LABELS_BELOW,1</span><br><span class="line"></span><br><span class="line"># 垂直方向移动标签的像素值（可正可负）</span><br><span class="line">VERTICAL_SHIFT,0</span><br><span class="line"></span><br><span class="line"># 设为1时，树形旋转不会影响单个标签的旋转</span><br><span class="line">STRAIGHT_LABELS,0</span><br><span class="line"></span><br><span class="line"># 仅适用于外部标签。设为1时，标签将沿树对齐（圆形模式）或垂直显示（常规模式），忽略所有旋转参数</span><br><span class="line">ALIGN_TO_TREE,0</span><br><span class="line"></span><br><span class="line"># 字体大小因子：外部标签默认字体大小略小于叶节点间距，此值可缩放（&lt;1减小，&gt;1增大）</span><br><span class="line">SIZE_FACTOR,1</span><br><span class="line"></span><br><span class="line"># 外部标签额外水平偏移（适用于无根模式调整标签位置）</span><br><span class="line">EXTERNAL_LABEL_SHIFT,0</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 是否在外部标签列上方显示数据集标签（注释状态）</span><br><span class="line">#SHOW_LABELS 1</span><br><span class="line"></span><br><span class="line"># 数据集标签大小因子（注释状态）</span><br><span class="line">#LABEL_SIZE_FACTOR 1</span><br><span class="line"></span><br><span class="line"># 数据集标签旋转（注释状态）</span><br><span class="line">#LABEL_ROTATION 0</span><br><span class="line"></span><br><span class="line"># 数据集标签像素偏移（注释状态）</span><br><span class="line">#LABEL_SHIFT 0</span><br><span class="line"></span><br><span class="line"># 数据集标签与树对齐（仅圆形模式有效，注释状态）</span><br><span class="line">#LABEL_ALIGN_TO_TREE,0</span><br><span class="line"></span><br><span class="line"># 内部节点可通过ID直接指定，或用iTOL帮助文档描述的&#x27;最后共同祖先&#x27;方法</span><br><span class="line">#=================================================================#</span><br><span class="line">#                 数据部分（&quot;DATA&quot;关键字后开始）                  #</span><br><span class="line">#=================================================================#</span><br><span class="line"># 每个节点可包含以下字段：</span><br><span class="line"># ID,标签文本,位置,颜色,样式,大小因子,旋转角度</span><br><span class="line"></span><br><span class="line"># 位置参数说明：</span><br><span class="line">#  -1 = 外部标签</span><br><span class="line">#  0-1 = 内部标签（0:分支起点, 0.5:中点, 1:终点）</span><br><span class="line"># 样式可选：&#x27;normal&#x27;,&#x27;bold&#x27;,&#x27;italic&#x27;,&#x27;bold-italic&#x27;</span><br><span class="line"># 大小因子将乘以标准字体大小</span><br><span class="line"></span><br><span class="line">DATA</span><br><span class="line"># 示例：</span><br><span class="line"></span><br><span class="line"># 节点9598将显示红色粗体外部标签&quot;Pan troglodytes&quot;，字体大小为标准2倍</span><br><span class="line">#9598,Pan troglodytes,-1,#ff0000,bold,2,0</span><br><span class="line"></span><br><span class="line"># 节点9606将显示多样式混合外部标签</span><br><span class="line">#9606,&lt;bi color=&#x27;#006600&#x27;&gt;Homo &lt;/bi&gt;&lt;i&gt;sapiens&lt;/i&gt;&lt;sup size=&#x27;0.5&#x27; color=&#x27;#999999&#x27;&gt;citation&lt;/sup&gt;,-1,#000000,normal,1,0</span><br><span class="line"></span><br><span class="line"># 节点4530将显示蓝色粗斜体内部标签&quot;Oryza sativa&quot;，位于分支起点</span><br><span class="line">#4530,Oryza sativa,0,#0000ff,bold-italic,1,0</span><br><span class="line"></span><br><span class="line">其实与上面饼图文件一样，表头信息加后面的数据</span><br><span class="line">echo -e &quot;DATASET_TEXT</span><br><span class="line">SEPARATOR	TAB</span><br><span class="line">DATASET_LABEL	TEST</span><br><span class="line">COLOR	#ff0000</span><br><span class="line">DATA&quot; &gt; cafe.txt</span><br><span class="line">sed -r &#x27;s/^([^&gt;]+)&lt;[0-9]+&gt;/\1/g&#x27; |awk &#x27;&#123;print $1&quot;\t+&quot;$2&quot;/-&quot;$3&quot;\t0.5\t#ff0000\tnormal\t1\t0&quot;&#125;&#x27; &gt;&gt; cafe.txt</span><br><span class="line">sed -i &#x27;/&lt;[0-9]\+&gt;/d&#x27; cafe.txt</span><br></pre></td></tr></table></figure>
+<p>配置完成之后一样，拖入网站即可</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/05/19/%E5%88%86%E5%8C%96%E6%97%B6%E9%97%B4%E8%AE%A1%E7%AE%97/" rel="prev" title="">
+      <i class="fa fa-chevron-left"></i> 
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2025/05/19/%E8%BF%9B%E5%8C%96%E6%A0%91%E7%9A%84%E6%9E%84%E5%BB%BA%E4%B8%8E%E7%BE%8E%E5%8C%96/" rel="next" title="">
+       <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E5%9B%A0%E5%AE%B6%E6%97%8F%E6%89%A9%E5%BC%A0%E6%94%B6%E7%BC%A9"><span class="nav-number">1.</span> <span class="nav-text">基因家族扩张收缩</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%AE%89%E8%A3%85"><span class="nav-number">1.1.</span> <span class="nav-text">1.安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%87%86%E5%A4%87%E6%96%87%E4%BB%B6"><span class="nav-number">1.2.</span> <span class="nav-text">2.准备文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1gene-families-txt"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1gene_families.txt</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2tree-txt"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2tree.txt</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E8%BF%90%E8%A1%8C"><span class="nav-number">1.3.</span> <span class="nav-text">3.运行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E7%BB%93%E6%9E%9C"><span class="nav-number">1.4.</span> <span class="nav-text">4.结果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="nav-number">1.5.</span> <span class="nav-text">5.可视化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1%E7%BB%98%E5%88%B6%E9%A5%BC%E5%9B%BE"><span class="nav-number">1.5.1.</span> <span class="nav-text">5.1绘制饼图</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Plank"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Plank</p>
+  <div class="site-description" itemprop="description">白马？定叫他有来无回！</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Plank</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">54k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">49 分钟</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : 'Ov23liuVZlZVoSkVGvSX',
+      clientSecret: 'fea2d23c05d1fb2cdcd68737c856ed4e1e5dc944',
+      repo        : 'MagicWu',
+      owner       : 'wefun0454',
+      admin       : ['wefun0454'],
+      id          : 'e434bed9e51780f772314311b2cb408f',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/1.svg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/1.svg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":false,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="进化树的构建与美化构建进化树常常有多种办法，常用的有邻接法（NJ），UMPGA，最大简约法（MP），最大似然法（ML），贝叶斯法，不同方法各有其优缺点，最常用的就是ML和贝叶斯法，各个方法的原理及优缺点不在此处进行赘述，以下仅介绍建树的具体流程  构建进化树一般分为两步，第一步进行多序列比对，第二步对比对结果建树。 1.多序列比对多序列比对常用多序列比对常用软件为 muscle 和 mafft,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WeFun blog">
+<meta property="og:url" content="http://example.com/2025/05/19/%E8%BF%9B%E5%8C%96%E6%A0%91%E7%9A%84%E6%9E%84%E5%BB%BA%E4%B8%8E%E7%BE%8E%E5%8C%96/index.html">
+<meta property="og:site_name" content="WeFun blog">
+<meta property="og:description" content="进化树的构建与美化构建进化树常常有多种办法，常用的有邻接法（NJ），UMPGA，最大简约法（MP），最大似然法（ML），贝叶斯法，不同方法各有其优缺点，最常用的就是ML和贝叶斯法，各个方法的原理及优缺点不在此处进行赘述，以下仅介绍建树的具体流程  构建进化树一般分为两步，第一步进行多序列比对，第二步对比对结果建树。 1.多序列比对多序列比对常用多序列比对常用软件为 muscle 和 mafft,">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-05-19T07:53:23.605Z">
+<meta property="article:modified_time" content="2025-05-19T07:08:52.890Z">
+<meta property="article:author" content="Plank">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2025/05/19/%E8%BF%9B%E5%8C%96%E6%A0%91%E7%9A%84%E6%9E%84%E5%BB%BA%E4%B8%8E%E7%BE%8E%E5%8C%96/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title> | WeFun blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">WeFun blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/05/19/%E8%BF%9B%E5%8C%96%E6%A0%91%E7%9A%84%E6%9E%84%E5%BB%BA%E4%B8%8E%E7%BE%8E%E5%8C%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Plank">
+      <meta itemprop="description" content="白马？定叫他有来无回！">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="WeFun blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2025-05-19 15:53:23 / 修改时间：15:08:52" itemprop="dateCreated datePublished" datetime="2025-05-19T15:53:23+08:00">2025-05-19</time>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>6.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>6 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="进化树的构建与美化"><a href="#进化树的构建与美化" class="headerlink" title="进化树的构建与美化"></a>进化树的构建与美化</h1><pre><code>构建进化树常常有多种办法，常用的有邻接法（NJ），UMPGA，最大简约法（MP），最大似然法（ML），贝叶斯法，不同方法各有其优缺点，最常用的就是ML和贝叶斯法，各个方法的原理及优缺点不在此处进行赘述，以下仅介绍建树的具体流程
+</code></pre>
+<p>构建进化树一般分为两步，第一步进行多序列比对，第二步对比对结果建树。</p>
+<h2 id="1-多序列比对"><a href="#1-多序列比对" class="headerlink" title="1.多序列比对"></a>1.多序列比对</h2><p>多序列比对常用多序列比对常用软件为 muscle 和 mafft, 这里使用 muscle。github下载链接为<a target="_blank" rel="noopener" href="https://github.com/rcedgar/muscle/archive/refs/tags/v5.3.tar.gz%EF%BC%8C%E5%AE%98%E7%BD%91%E4%BD%8D%E7%BD%AE%E4%B8%BAhttps://github.com/rcedgar/muscle">https://github.com/rcedgar/muscle/archive/refs/tags/v5.3.tar.gz，官网位置为https://github.com/rcedgar/muscle</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">muscle -in all_FAD.fasta -out all_FAD.muscle.fasta</span><br><span class="line">#all_FAD.fasta为建树物种共同的某一基因家族的序列组合，为蛋白质序列</span><br></pre></td></tr></table></figure>
+
+<p>如果想要使用mafft可以使用以下命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#高速模式</span><br><span class="line">mafft in &gt; out</span><br><span class="line">#高准确性模式（序列&lt;200，aa/nt&lt;2000）</span><br><span class="line">mafft --maxiterate 1000 --localpair in &gt; out</span><br><span class="line">mafft --maxiterate 1000 --genafpair in &gt; out</span><br><span class="line">mafft --maxiterate 1000 --globarpair in &gt; out</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-构建进化树"><a href="#2-构建进化树" class="headerlink" title="2.构建进化树"></a>2.构建进化树</h2><p>RAxML 是一款基于最大似然法构建系统发育树的软件，运算速度较快，推荐使用。RAxML 的输入文件为多序列比对文件，phylip 格式或者 fasta格式，输出文件为 newick 格式进化树<br>软件下载位置：<a target="_blank" rel="noopener" href="https://cme.h-its.org/exelixis/web/software/raxml/hands_on.html">https://cme.h-its.org/exelixis/web/software/raxml/hands_on.html</a><br>下载好后可以看到，有raxmlHPC和raxmlHPC-PHREADS 分别为单线程和多线程版本，一般使用后者  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">raxmlHPC-PTHREADS -m PROTGAMMAJTT -f a -p 123 -x 123 -# 100 -n out -s all_FAD.muscle.fasta 1&gt;tree.log 2&gt;tree.err</span><br><span class="line"></span><br><span class="line">-m PROTGAMMAJTT \ # 指定建树模型，PROT表示输入为蛋白质，GAMMA表示离散位点使用的估计方式，JTT表示氨基酸模型</span><br><span class="line">-f a \ # 指定算法，a表示使用rapidBootstrap方法并搜索最佳ML树</span><br><span class="line">-p 123 \ # parsimonyRandomSeed，随机数种子</span><br><span class="line">-x 123 \ # rapidBoostrap时RandomNumberSeed，随机数种子</span><br><span class="line">-# 100 \ # bootstrap次数</span><br><span class="line">-n out \ # 指定输出文件后缀</span><br><span class="line">-s all_FAD.muscle.fasta \ # 指定输入的比对文件</span><br><span class="line">1&gt;tree.log 2&gt;tree.err#存储日志</span><br><span class="line">-T增加线程数，默认为2</span><br></pre></td></tr></table></figure>
+<p><strong>#使用iqtree构建</strong><br>iqtree 可以自动估计最佳模型，并进行 bootstrap 分析，也是一款推荐的建树软件。软件网址：<a target="_blank" rel="noopener" href="http://www.iqtree.org/">http://www.iqtree.org/</a>  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">iqtree -s all_FAD.muscle.fasta -m MFP -bb 1000 -nt 4-pre iqtree.all_FAD.muscle.fasta</span><br><span class="line">-s all_FAD.muscle.fasta \ # 指定输入的比对文件</span><br><span class="line">-m MFP \ # iqtree自动选择模型</span><br><span class="line">-bb 1000 \ # bootstrap分析次数，至少是1000</span><br><span class="line">-nt 4 \ # 线程数</span><br><span class="line">-pre iqtree.all_FAD.muscle.fasta # 输出文件前缀</span><br></pre></td></tr></table></figure>
+<p>通常情况下我们无法直接获得建树物种共同的某一基因家族的序列的组合，此时我们可以借助之前orthofinder的结果来进行构建物种树，ortherfinder操作具体教程详见《查找共有和独有基因》  </p>
+<p>构建树的方式有两种，一种是使用连接法&#x2F;串联法，将某一物种的所有单拷贝基因基因家族连接成一整条序列（supergene），每一物种都进行类似操作之后进行建树<br>另一种是合并法，每一个基因家族单独建树，总结其中出现次数最多的建树情况，然后将这种情况当作是最终结果</p>
+<p>使用连接法时可以将pep文件转成CDS序列文件，再进行序列比对，进而进行建树，这种方式通常用于亲缘关系较近的物种建树  </p>
+<p>还可以使用4d位点，4d位点指四重简并位点，该一位点不论是ATCG中的任意碱基都不影响该蛋白质的编码，仅保留4d位点的序列可以减少比对时的数据量，进而提升建树速度及准确度</p>
+<p>orthofinder使用msa的建树使用的就是连接法，不加msa使用的就是合并法，通常情况下建议使用msa参数</p>
+<p>假设单拷贝基因家族的数量太少，此时可以将条件放宽，认为不是所有物种都具有的单拷贝基因家族才为共有，即假设共有10个物种，9个物种具有该基因家族，仍认为这是共有单拷贝基因家族</p>
+<p><strong>串联法</strong><br>单拷贝基因家族位置为：data&#x2F;OrthoFinder&#x2F;Results_May14&#x2F;MultipleSequenceAlignments&#x2F;SpeciesTreeAlignment.fa</p>
+<p>如果某一些位置的比对结果较差，可以选择将较差的部分删掉，可以使用trimal，基因树一般需要进行此操作，物种树一般不需要进行此操作  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/scapella/trimal.git</span><br><span class="line">cd trimal/source</span><br><span class="line">make</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">trimal -in SpeciesTreeAlignment.fa -out SpeciesTreeAlignment_trim.fa -fasta -gt 0.6 -cons 60 </span><br><span class="line"></span><br><span class="line">-gt 0.6 #保留60%基因共有的位点</span><br><span class="line">-cons 60 # 过滤后总长不少于输入数据的60%</span><br><span class="line"></span><br><span class="line">-fasta可替换</span><br><span class="line">-CUSTAL格式的-clustal输出文件</span><br><span class="line">-nbrf NBRF / PIR格式的输出文件</span><br><span class="line">-nexus NEXUS格式的输出文件</span><br><span class="line">-mega MEGA格式的输出文件</span><br><span class="line">-phylip3.2 PHYLIP3.2格式的输出文件</span><br><span class="line">-phylip PHYLIP / PHYLIP4格式的输出文件</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">raxmlHPC-PTHREADS -m PROTGAMMAJTT -f a -p 123 -x 123 -# 100 -n out  -T 20 -s SpeciesTreeAlignment.fa 1&gt;tree.log 2&gt;tree.err</span><br></pre></td></tr></table></figure>
+<p>参数与上一致，不过多赘述</p>
+<p><strong>合并法</strong><br>orthofinder已自建各基因家族树，位置为data&#x2F;OrthoFinder&#x2F;Results_Dec03&#x2F;Orthogroups&#x2F;Orthogroups_SingleCopyOrthologues.txt</p>
+<p>先安装Astral</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/smirarab/ASTRAL.git</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#先使用脚本提取单拷贝基因树</span><br><span class="line">orthDir=data3/OrthoFinder/Results_Dec03/</span><br><span class="line">cat $orthDir/Orthogroups/Orthogroups_SingleCopyOrthologues.txt | \</span><br><span class="line">while read aa; \</span><br><span class="line">do cat $orthDir/Gene_Trees/$aa\_tree.txt | \</span><br><span class="line">awk &#x27;&#123;print $0&#125;&#x27; ;\</span><br><span class="line">done &gt; SingleCopy.trees</span><br><span class="line"></span><br><span class="line">#去除基因ID，保留物种名</span><br><span class="line">sed &#x27;s/\([(,][A-Za-z]\+\)_[^:]*/\1/g&#x27; SingleCopy.trees &gt; Astral_input.trees</span><br><span class="line"></span><br><span class="line">#运行Astral</span><br><span class="line">java -jar astral.5.7.8.jar -i Astral_input.trees -o Astral_output.tree 2&gt;out.log</span><br></pre></td></tr></table></figure>
+<p>如果物种树较多，astral会出现内存不够的情况，实际测试时使用-Xmx300G添加了300G内存仍显示内存不足  </p>
+<p>如果Orthogroups_SingleCopyOrthologues.txt为空，需要放宽标准，选取90%或者95%的物种有的单拷贝同源序列可以使用脚本：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">import pandas as pd</span><br><span class="line"></span><br><span class="line">def extract_high_coverage_single_copy_orthogroups(orthogroups_file, output_file, coverage_threshold=0.95):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    从Orthogroups.tsv中提取覆盖率达到指定阈值(默认95%)且为单拷贝的直系同源组</span><br><span class="line">    </span><br><span class="line">    参数:</span><br><span class="line">        orthogroups_file: Orthogroups.tsv文件路径</span><br><span class="line">        output_file: 输出文件路径</span><br><span class="line">        coverage_threshold: 覆盖率阈值(0-1之间)</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    # 读取Orthogroups.tsv文件</span><br><span class="line">    df = pd.read_csv(orthogroups_file, sep=&#x27;\t&#x27;, index_col=0)</span><br><span class="line">    </span><br><span class="line">    # 计算每个直系同源组的覆盖率(非空值的比例)</span><br><span class="line">    coverage = df.notnull().mean(axis=1)</span><br><span class="line">    </span><br><span class="line">    # 检查每个直系同源组是否为单拷贝</span><br><span class="line">    def is_single_copy(row):</span><br><span class="line">        # 对每个物种的基因计数，逗号分隔表示多拷贝</span><br><span class="line">        for genes in row.dropna():</span><br><span class="line">            if &#x27;,&#x27; in str(genes):  # 如果有逗号，表示该物种有多个拷贝</span><br><span class="line">                return False</span><br><span class="line">        return True</span><br><span class="line">    </span><br><span class="line">    # 应用单拷贝检查</span><br><span class="line">    single_copy_mask = df.apply(is_single_copy, axis=1)</span><br><span class="line">    </span><br><span class="line">    # 筛选同时满足高覆盖率和单拷贝条件的直系同源组</span><br><span class="line">    high_coverage_single_copy = coverage[(coverage &gt;= coverage_threshold) &amp; single_copy_mask].index</span><br><span class="line">    </span><br><span class="line">    # 保存结果到文件</span><br><span class="line">    with open(output_file, &#x27;w&#x27;) as f:</span><br><span class="line">        for og in high_coverage_single_copy:</span><br><span class="line">            f.write(f&quot;&#123;og&#125;\n&quot;)</span><br><span class="line">    </span><br><span class="line">    print(f&quot;找到 &#123;len(high_coverage_single_copy)&#125; 个覆盖率达到 &#123;coverage_threshold*100&#125;% 的单拷贝直系同源组&quot;)</span><br><span class="line">    print(f&quot;结果已保存到 &#123;output_file&#125;&quot;)</span><br><span class="line"></span><br><span class="line">if __name__ == &quot;__main__&quot;:</span><br><span class="line">    import argparse</span><br><span class="line">    </span><br><span class="line">    parser = argparse.ArgumentParser(description=&#x27;提取覆盖率达到指定阈值且为单拷贝的直系同源组&#x27;)</span><br><span class="line">    parser.add_argument(&#x27;-i&#x27;, &#x27;--input&#x27;, required=True, help=&#x27;Orthogroups.tsv文件路径&#x27;)</span><br><span class="line">    parser.add_argument(&#x27;-o&#x27;, &#x27;--output&#x27;, required=True, help=&#x27;输出文件路径&#x27;)</span><br><span class="line">    parser.add_argument(&#x27;-t&#x27;, &#x27;--threshold&#x27;, type=float, default=0.95, </span><br><span class="line">                        help=&#x27;覆盖率阈值(0-1之间，默认0.95)&#x27;)</span><br><span class="line">    </span><br><span class="line">    args = parser.parse_args()</span><br><span class="line">    </span><br><span class="line">    extract_high_coverage_single_copy_orthogroups(args.input, args.output, args.threshold)</span><br></pre></td></tr></table></figure>
+<p>该python脚本是针对终端而写，使用方式为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python extract_high_coverage_ogs.py -i Orthogroups.tsv -o SingleCopyOrthologues.txt -t 0.95</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-进化树的美化"><a href="#3-进化树的美化" class="headerlink" title="3.进化树的美化"></a>3.进化树的美化</h2><p>进化树构建完成之后美化方式有多种，MEGA，FigTree等软件，在线网站EvolView，ITOL等等，以下介绍ITOL网站，功能全面，客制化能力强<br>ITOL网址为：<a target="_blank" rel="noopener" href="https://itol.embl.de/">https://itol.embl.de/</a><br>该软件 2020 年 10 月由免费软件转为收费，访问模式可以使用，但不能保存注释，必须立即导出。基本的树结构调整以及字体调整可以通过 control面板实现，添加 symbol、饼图及条形图等，需要自己准备好 dataset 文件。<br>首先根据之前的建树结果得到树文件，RAxML运行结果中树文件名为RAxML_bipartitionsBranchLabels.out<br>如果想在图中添加更多的信息，就需要自己准备好配置文件，将文件拖拽到进化树美化页面。<br>然后可以根据需要准备以下文件：  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">##color_label.txt（展示文字的颜色）:</span><br><span class="line"># 指定dataset类型</span><br><span class="line">TREE_COLORS</span><br><span class="line"># 指定文件分隔符</span><br><span class="line">SEPARATOR TAB</span><br><span class="line"># 指定数据，第一列为label，</span><br><span class="line"># 第二列写为&quot;label&quot;</span><br><span class="line"># 第三列为颜色</span><br><span class="line"># 第四列为字体</span><br><span class="line"># 第五列为字体大小</span><br><span class="line">DATA</span><br><span class="line">##color_range.txt（展示文字的背景色）:</span><br><span class="line">##binary.txt（额外标记）:</span><br><span class="line">##barchat.txt（直方图）:</span><br><span class="line">##piechat.txt（饼图）:</span><br></pre></td></tr></table></figure>
+<p>准备好文件之后，打开ITOL，点击annotate下upload a tree，可以选择直接复制树文件内容，也可以上传文件。完成之后可以显示最初的进化树。<br>进化树如果是物种树一般需要定根，否则显示的是无根树，定根只需要在相应的节点点击，选择tree structure-&gt;re-root the tree here即可。  </p>
+<p>其余在右侧control panel中的各个参数可以根据自己的需要进行选择，选择好之后只需要将其他配置文件拖入网页中即可添加其他的注释信息。<br>其他具体的信息可以看ITOL网站的help信息。  </p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/05/19/%E5%9F%BA%E5%9B%A0%E5%AE%B6%E6%97%8F%E6%89%A9%E5%BC%A0%E6%94%B6%E7%BC%A9/" rel="prev" title="">
+      <i class="fa fa-chevron-left"></i> 
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%9B%E5%8C%96%E6%A0%91%E7%9A%84%E6%9E%84%E5%BB%BA%E4%B8%8E%E7%BE%8E%E5%8C%96"><span class="nav-number">1.</span> <span class="nav-text">进化树的构建与美化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%A4%9A%E5%BA%8F%E5%88%97%E6%AF%94%E5%AF%B9"><span class="nav-number">1.1.</span> <span class="nav-text">1.多序列比对</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%9E%84%E5%BB%BA%E8%BF%9B%E5%8C%96%E6%A0%91"><span class="nav-number">1.2.</span> <span class="nav-text">2.构建进化树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E8%BF%9B%E5%8C%96%E6%A0%91%E7%9A%84%E7%BE%8E%E5%8C%96"><span class="nav-number">1.3.</span> <span class="nav-text">3.进化树的美化</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Plank"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Plank</p>
+  <div class="site-description" itemprop="description">白马？定叫他有来无回！</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Plank</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">54k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">49 分钟</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : 'Ov23liuVZlZVoSkVGvSX',
+      clientSecret: 'fea2d23c05d1fb2cdcd68737c856ed4e1e5dc944',
+      repo        : 'MagicWu',
+      owner       : 'wefun0454',
+      admin       : ['wefun0454'],
+      id          : 'faa912336f6b104c2ce4267c962287fc',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>
